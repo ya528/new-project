@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Week 2 Frontend Internship Task: Responsive Web Design featuring fluid grids, flexible images, CSS clamp() typography, and adaptive media queries." />
+  <title>FluidGrid Studio — Responsive Web Design Showcase</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header & Pure-CSS Responsive Navigation -->
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a href="#" class="brand" aria-label="FluidGrid Studio Home">
+        <span class="brand-badge" aria-hidden="true">FG</span>
+        <span>FluidGrid Studio</span>
+      </a>
+
+      <!-- Pure CSS Hamburger Toggle for Mobile Viewports -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation menu" />
+      <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <nav class="site-nav" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li><a href="#principles">Principles</a></li>
+          <li><a href="#breakpoints">Breakpoints</a></li>
+          <li><a href="#gallery">Fluid Media</a></li>
+          <li><a href="#testing">Testing Matrix</a></li>
+          <li><a href="#contact" class="btn btn-primary btn-sm">Inspect Code</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-layout">
+        <div class="hero-text">
+          <span class="pill">Week 2 Deliverable &bull; Responsive Web Design</span>
+          <h1>Layouts Built to Flow Across Every Screen Size</h1>
+          <p class="hero-lead">
+            Engineered mobile-first with intrinsic CSS Grid tracks, Flexbox alignment, fluid <code>clamp()</code> typography, and responsive media scaling from <code>320px</code> smartphones to <code>1440px+</code> widescreen monitors.
+          </p>
+          <div class="hero-cta-group">
+            <a href="#breakpoints" class="btn btn-primary">Explore Breakpoints</a>
+            <a href="#testing" class="btn btn-secondary">View QA Matrix</a>
+          </div>
+          <ul class="hero-stats" aria-label="Key Responsive Techniques">
+            <li>
+              <strong>Mobile-First</strong>
+              <span>Progressive <code>min-width</code> queries</span>
+            </li>
+            <li>
+              <strong>Fluid Type</strong>
+              <span>Continuous <code>clamp()</code> scaling</span>
+            </li>
+            <li>
+              <strong>Zero Overflow</strong>
+              <span>Intrinsic <code>minmax(0, 1fr)</code> grids</span>
+            </li>
+          </ul>
+        </div>
+
+        <figure class="hero-figure">
+          <img
+            src="assets/responsive-devices.svg"
+            alt="Diagram showing desktop, tablet, and smartphone layouts adapting across viewports"
+            width="800"
+            height="540"
+          />
+          <figcaption>Fluid SVG illustration scaling smoothly without pixelation or layout shift.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Core Responsive Principles -->
+    <section id="principles" class="section section-surface">
+      <div class="container">
+        <header class="section-heading">
+          <span class="eyebrow">Core Architecture</span>
+          <h2>Three Pillars of Responsive Engineering</h2>
+          <p>Combining modern intrinsic CSS features with structured media queries for resilient multi-device layouts.</p>
+        </header>
+
+        <div class="auto-grid">
+          <article class="feature-card">
+            <div class="icon-chip" aria-hidden="true">01</div>
+            <h3>Flexible Grid Systems</h3>
+            <p>
+              Uses <code>repeat(auto-fit, minmax(min(100%, 260px), 1fr))</code> so card columns wrap automatically when horizontal space shrinks—even before hitting a media query breakpoint.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="icon-chip" aria-hidden="true">02</div>
+            <h3>Fluid Images &amp; Aspect Ratios</h3>
+            <p>
+              Constrains media with <code>max-width: 100%</code>, <code>height: auto</code>, and explicit <code>aspect-ratio</code> rules so containers reserve space before assets finish loading.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="icon-chip" aria-hidden="true">03</div>
+            <h3>Adaptive Navigation &amp; Spacing</h3>
+            <p>
+              Collapses desktop links into an accessible, pure-CSS mobile drawer below <code>768px</code> while scaling section padding and font sizes smoothly via <code>clamp()</code>.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Breakpoint Strategy Section -->
+    <section id="breakpoints" class="section">
+      <div class="container">
+        <header class="section-heading">
+          <span class="eyebrow">Media Query Architecture</span>
+          <h2>Mobile-First Viewport Adaptation</h2>
+          <p>Base styles target small screens first, progressively enhancing layout density as viewport width increases.</p>
+        </header>
+
+        <div class="breakpoint-grid">
+          <article class="bp-card">
+            <div class="bp-header">
+              <span class="bp-tag">Base Styles</span>
+              <code>&lt; 640px</code>
+            </div>
+            <h3>Smartphone Portrait</h3>
+            <ul>
+              <li>Single-column vertical flow for effortless thumb scrolling</li>
+              <li>Collapsible mobile navigation drawer with full-width tap targets</li>
+              <li>Compact container gutters (<code>1rem</code>) and stacked CTA buttons</li>
+            </ul>
+          </article>
+
+          <article class="bp-card">
+            <div class="bp-header">
+              <span class="bp-tag">Tablet Query</span>
+              <code>&ge; 640px &amp; &ge; 768px</code>
+            </div>
+            <h3>Large Phones &amp; Tablets</h3>
+            <ul>
+              <li>Two-column card grids and horizontal CTA button rows</li>
+              <li>Expanded inline navigation bar replacing the mobile drawer</li>
+              <li>Balanced typographic scale and increased section breathing room</li>
+            </ul>
+          </article>
+
+          <article class="bp-card">
+            <div class="bp-header">
+              <span class="bp-tag">Desktop Query</span>
+              <code>&ge; 1024px</code>
+            </div>
+            <h3>Laptops &amp; Widescreen</h3>
+            <ul>
+              <li>Asymmetric 2-column hero split (<code>1.15fr 1fr</code>)</li>
+              <li>Three-column feature and breakpoint comparison grids</li>
+              <li>Maximum container width capped at <code>1200px</code> for optimal line length</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fluid Media Showcase -->
+    <section id="gallery" class="section section-surface">
+      <div class="container media-split">
+        <div class="media-card">
+          <div class="aspect-frame ratio-16-9" role="img" aria-label="16 by 9 fluid media container demonstration">
+            <div class="ratio-badge">aspect-ratio: 16 / 9</div>
+            <p>Scales proportionally across every viewport width</p>
+          </div>
+        </div>
+
+        <div class="media-copy">
+          <span class="eyebrow">Fluid Media Handling</span>
+          <h2>Preventing Distortion &amp; Layout Shift</h2>
+          <p>
+            Fixed pixel dimensions break responsive layouts on narrow viewports by forcing horizontal scrollbars or squishing images. Pairing relative percentage widths with modern <code>aspect-ratio</code> and <code>object-fit: cover</code> guarantees crisp framing on every screen.
+          </p>
+          <dl class="spec-list">
+            <div>
+              <dt>Vector Graphics</dt>
+              <dd>Inline/linked SVG with <code>viewBox</code> for infinite sharpness</dd>
+            </div>
+            <div>
+              <dt>Container Stability</dt>
+              <dd>Explicit <code>width</code> &amp; <code>height</code> attributes eliminate CLS</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- Responsive Testing Matrix Table -->
+    <section id="testing" class="section">
+      <div class="container">
+        <header class="section-heading">
+          <span class="eyebrow">Verification</span>
+          <h2>Cross-Device Viewport Testing Matrix</h2>
+          <p>Validated in Chrome and Firefox DevTools Responsive Design Mode across standard device presets.</p>
+        </header>
+
+        <div class="table-wrapper" role="region" aria-label="Viewport Testing Matrix" tabindex="0">
+          <table class="qa-table">
+            <thead>
+              <tr>
+                <th>Device Category</th>
+                <th>Tested Width</th>
+                <th>Navigation Layout</th>
+                <th>Grid Columns</th>
+                <th>Overflow Check</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Compact Mobile (iPhone SE)</td>
+                <td><code>375px</code></td>
+                <td>Collapsible Drawer</td>
+                <td>1 Column</td>
+                <td><span class="status-pass">Pass (0px)</span></td>
+              </tr>
+              <tr>
+                <td>Standard Mobile (Pixel / iPhone)</td>
+                <td><code>412px</code></td>
+                <td>Collapsible Drawer</td>
+                <td>1 Column</td>
+                <td><span class="status-pass">Pass (0px)</span></td>
+              </tr>
+              <tr>
+                <td>Tablet Portrait (iPad)</td>
+                <td><code>768px</code></td>
+                <td>Horizontal Inline Bar</td>
+                <td>2 Columns</td>
+                <td><span class="status-pass">Pass (0px)</span></td>
+              </tr>
+              <tr>
+                <td>Laptop / Desktop</td>
+                <td><code>1280px</code></td>
+                <td>Horizontal Inline Bar</td>
+                <td>3 Columns</td>
+                <td><span class="status-pass">Pass (0px)</span></td>
+              </tr>
+              <tr>
+                <td>Large Widescreen</td>
+                <td><code>1440px</code></td>
+                <td>Centered Max-Width</td>
+                <td>3 Columns</td>
+                <td><span class="status-pass">Pass (0px)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section id="contact" class="section cta-wrap">
+      <div class="container">
+        <div class="cta-banner">
+          <div>
+            <h2>Complete Week 2 Submission Bundle</h2>
+            <p>Includes <code>index.html</code>, <code>styles.css</code>, <code>assets/responsive-devices.svg</code>, and <code>REPORT.md</code>.</p>
+          </div>
+          <a href="#main-content" class="btn btn-light">Return to Top</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-layout">
+      <div>
+        <a href="#" class="brand">
+          <span class="brand-badge" aria-hidden="true">FG</span>
+          <span>FluidGrid Studio</span>
+        </a>
+        <p class="footer-note">Week 2 Frontend Internship Deliverable — Mobile-First Responsive Web Design.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Sections</h4>
+        <ul>
+          <li><a href="#principles">Principles</a></li>
+          <li><a href="#breakpoints">Breakpoints</a></li>
+          <li><a href="#gallery">Fluid Media</a></li>
+          <li><a href="#testing">Testing Matrix</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Standards</h4>
+        <p>Semantic HTML5 &bull; CSS Grid &amp; Flexbox &bull; Fluid <code>clamp()</code> &bull; WCAG Focus Rings</p>
+        <p class="copyright">&copy; 2026 FluidGrid Studio. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

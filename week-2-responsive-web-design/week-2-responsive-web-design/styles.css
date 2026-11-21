@@ -1,0 +1,770 @@
+/* ==========================================================================
+   Week 2 Task: Implementation of Responsive Web Design
+   Approach: Mobile-First CSS Architecture with Fluid Typography, Intrinsic
+             Grids, Fluid Media, and Progressive min-width Media Queries.
+   ========================================================================== */
+
+:root {
+  /* Color System */
+  --bg-page: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-subtle: #f1f5f9;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-tint: #eff6ff;
+  --accent: #0ea5e9;
+  --border: #e2e8f0;
+  --dark-surface: #0f172a;
+  --success-bg: #dcfce7;
+  --success-text: #166534;
+
+  /* Fluid Typography Scale */
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.9375rem;
+  --fs-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --fs-h3: clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem);
+  --fs-h2: clamp(1.6rem, 1.3rem + 1.4vw, 2.25rem);
+  --fs-h1: clamp(1.95rem, 1.45rem + 2.4vw, 3.1rem);
+
+  /* Fluid Spacing & Layout Tokens */
+  --space-section: clamp(3rem, 2.2rem + 3.5vw, 5rem);
+  --container-max: 1200px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 12px 28px -6px rgba(15, 23, 42, 0.09);
+  --transition: 0.2s ease;
+}
+
+/* 1. Reset & Accessibility Foundations
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  color: var(--text-main);
+  background-color: var(--bg-page);
+  overflow-x: hidden;
+}
+
+img,
+svg,
+picture,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1, h2, h3, h4, p {
+  margin-top: 0;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.86em;
+  background-color: var(--bg-subtle);
+  color: var(--primary-hover);
+  padding: 0.15em 0.42em;
+  border-radius: 5px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible + label,
+.table-wrapper:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0.75rem;
+  z-index: 999;
+  background: var(--primary);
+  color: #ffffff;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  left: 0.75rem;
+}
+
+/* 2. Fluid Containers & Section Rhythm
+   -------------------------------------------------------------------------- */
+.container {
+  width: min(100% - 2rem, var(--container-max));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--space-section);
+}
+
+.section-surface {
+  background-color: var(--bg-surface);
+  border-block: 1px solid var(--border);
+}
+
+.section-heading {
+  max-width: 650px;
+  margin-inline: auto;
+  text-align: center;
+  margin-bottom: clamp(2rem, 1.5rem + 2vw, 3rem);
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.section-heading h2,
+.media-copy h2 {
+  font-size: var(--fs-h2);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.section-heading p {
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+/* 3. Buttons
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.7rem 1.35rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.btn-sm {
+  min-height: 38px;
+  padding: 0.45rem 0.95rem;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  border-color: var(--border);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-subtle);
+}
+
+.btn-light {
+  background-color: #ffffff;
+  color: var(--dark-surface);
+}
+
+.btn-light:hover {
+  background-color: var(--bg-subtle);
+}
+
+/* 4. Mobile-First Header & Pure-CSS Collapsible Navigation
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 68px;
+  padding-block: 0.65rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.brand-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+}
+
+.nav-toggle {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav-toggle-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.nav-toggle-label span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-main);
+  border-radius: 2px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.site-nav {
+  display: none;
+  width: 100%;
+  padding-top: 0.85rem;
+  margin-top: 0.65rem;
+  border-top: 1px solid var(--border);
+}
+
+.nav-toggle:checked ~ .site-nav {
+  display: block;
+}
+
+.nav-toggle:checked + .nav-toggle-label span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle:checked + .nav-toggle-label span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle:checked + .nav-toggle-label span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nav-list a:not(.btn) {
+  display: block;
+  padding: 0.55rem 0.25rem;
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.nav-list a:not(.btn):hover {
+  color: var(--primary);
+}
+
+.nav-list .btn {
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+/* 5. Mobile-First Hero Section
+   -------------------------------------------------------------------------- */
+.hero {
+  padding-block: clamp(2.5rem, 2rem + 2.5vw, 4.75rem);
+}
+
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.25rem;
+  align-items: center;
+}
+
+.pill {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background-color: var(--primary-tint);
+  color: var(--primary-hover);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero-text h1 {
+  font-size: var(--fs-h1);
+  line-height: 1.13;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+}
+
+.hero-lead {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  max-width: 58ch;
+}
+
+.hero-cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.hero-stats {
+  list-style: none;
+  margin: 0;
+  padding: 1.25rem 0 0;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+.hero-stats li {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-stats strong {
+  font-size: 0.95rem;
+}
+
+.hero-stats span {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+.hero-figure {
+  margin: 0;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 0.85rem;
+  box-shadow: var(--shadow-md);
+}
+
+.hero-figure img {
+  width: 100%;
+  border-radius: var(--radius-md);
+}
+
+.hero-figure figcaption {
+  margin-top: 0.75rem;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* 6. Intrinsic Auto-Fit Card Grid
+   -------------------------------------------------------------------------- */
+.auto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+  gap: 1.5rem;
+}
+
+.feature-card {
+  background-color: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.65rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.icon-chip {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background-color: var(--primary-tint);
+  color: var(--primary-hover);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1rem;
+}
+
+.feature-card h3,
+.bp-card h3 {
+  font-size: var(--fs-h3);
+  margin-bottom: 0.6rem;
+}
+
+.feature-card p {
+  color: var(--text-muted);
+  margin-bottom: 0;
+  font-size: var(--fs-sm);
+}
+
+/* 7. Breakpoint Cards
+   -------------------------------------------------------------------------- */
+.breakpoint-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.bp-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.65rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.bp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.bp-tag {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bp-card ul {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  display: grid;
+  gap: 0.5rem;
+}
+
+/* 8. Fluid Media & Aspect Ratio Section
+   -------------------------------------------------------------------------- */
+.media-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.aspect-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: #ffffff;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.ratio-badge {
+  background-color: rgba(56, 189, 248, 0.18);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  color: #7dd3fc;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  margin-bottom: 0.65rem;
+}
+
+.aspect-frame p {
+  margin: 0;
+  color: #e2e8f0;
+  font-size: var(--fs-sm);
+}
+
+.media-copy p {
+  color: var(--text-muted);
+}
+
+.spec-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 1.25rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.spec-list dt {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.spec-list dd {
+  margin: 0.2rem 0 0;
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+}
+
+/* 9. Responsive Table Wrapper
+   -------------------------------------------------------------------------- */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.qa-table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--fs-sm);
+}
+
+.qa-table th,
+.qa-table td {
+  padding: 0.95rem 1.15rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.qa-table thead th {
+  background-color: var(--bg-subtle);
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.qa-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.status-pass {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background-color: var(--success-bg);
+  color: var(--success-text);
+  font-weight: 700;
+  font-size: var(--fs-xs);
+}
+
+/* 10. CTA Banner & Footer
+   -------------------------------------------------------------------------- */
+.cta-wrap {
+  padding-top: 0.5rem;
+}
+
+.cta-banner {
+  background-color: var(--dark-surface);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: clamp(1.75rem, 1.4rem + 1.5vw, 2.75rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.cta-banner h2 {
+  font-size: clamp(1.35rem, 1.15rem + 0.9vw, 1.85rem);
+  margin-bottom: 0.35rem;
+}
+
+.cta-banner p {
+  color: #cbd5e1;
+  margin-bottom: 0;
+}
+
+.cta-banner code {
+  background-color: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+.site-footer {
+  background-color: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  padding-block: 3rem;
+}
+
+.footer-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.footer-note,
+.footer-col p {
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  margin-top: 0.65rem;
+}
+
+.footer-col h4 {
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.footer-col a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+}
+
+.footer-col a:hover {
+  color: var(--primary);
+}
+
+.copyright {
+  margin-top: 1rem;
+  font-size: var(--fs-xs);
+}
+
+/* ==========================================================================
+   11. Progressive Enhancement Media Queries (Mobile-First min-width)
+   ========================================================================== */
+
+/* Small Tablets & Large Phones (>= 640px) */
+@media (min-width: 640px) {
+  .hero-cta-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .spec-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Tablets & Small Laptops (>= 768px) */
+@media (min-width: 768px) {
+  .nav-toggle-label {
+    display: none;
+  }
+
+  .site-nav {
+    display: block;
+    width: auto;
+    padding-top: 0;
+    margin-top: 0;
+    border-top: none;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .nav-list a:not(.btn) {
+    padding: 0.35rem 0;
+  }
+
+  .nav-list .btn {
+    width: auto;
+    margin-top: 0;
+  }
+
+  .breakpoint-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cta-banner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* Desktops & Widescreens (>= 1024px) */
+@media (min-width: 1024px) {
+  .hero-layout {
+    grid-template-columns: 1.15fr 1fr;
+    gap: 3rem;
+  }
+
+  .breakpoint-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .media-split {
+    grid-template-columns: 1.05fr 1fr;
+    gap: 3rem;
+  }
+
+  .footer-layout {
+    grid-template-columns: 1.4fr 0.8fr 1fr;
+  }
+}
