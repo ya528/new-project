@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Week 1 Internship Task: Responsive static webpage translated from a wireframe concept using semantic HTML5 and modern CSS3." />
+  <title>ApexStudio — Wireframe to Static Web Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header & Primary Navigation -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand" aria-label="ApexStudio Home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>ApexStudio</span>
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#workflow">Workflow</a></li>
+          <li><a href="#contact" class="btn btn-primary btn-sm">Get Started</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section id="overview" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="badge">Week 1 Deliverable</span>
+          <h1>Translate Wireframe Concepts into Clean, Responsive Web Pages</h1>
+          <p class="lead">
+            A structured, semantic HTML5 and modular CSS3 implementation engineered for visual accuracy, accessibility, and seamless adaptation across desktop, tablet, and mobile viewports.
+          </p>
+          <div class="hero-actions">
+            <a href="#features" class="btn btn-primary">Explore Components</a>
+            <a href="#workflow" class="btn btn-outline">View Layout Strategy</a>
+          </div>
+          <dl class="hero-metrics" aria-label="Implementation Highlights">
+            <div>
+              <dt>Semantic Tags</dt>
+              <dd>100% HTML5</dd>
+            </div>
+            <div>
+              <dt>Layout System</dt>
+              <dd>Grid + Flexbox</dd>
+            </div>
+            <div>
+              <dt>Breakpoints</dt>
+              <dd>3 Viewports</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="hero-visual" aria-label="Wireframe Preview Card">
+          <div class="mockup-frame">
+            <div class="mockup-topbar">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="mockup-url">index.html — 1280px Viewport</span>
+            </div>
+            <div class="mockup-body">
+              <div class="wire-block wire-banner">Hero Banner &amp; Value Proposition</div>
+              <div class="wire-row">
+                <div class="wire-block wire-card">Card 01</div>
+                <div class="wire-block wire-card">Card 02</div>
+                <div class="wire-block wire-card">Card 03</div>
+              </div>
+              <div class="wire-block wire-split">
+                <span>Split Feature Panel</span>
+                <span class="wire-pill">CTA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Features Section -->
+    <section id="features" class="section section-alt">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-eyebrow">Architecture</span>
+          <h2>Core Layout &amp; Styling Principles</h2>
+          <p>Built from the ground up to satisfy visual fidelity, clean code organization, and responsive behavior.</p>
+        </header>
+
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">01</div>
+            <h3>Semantic HTML Hierarchy</h3>
+            <p>
+              Uses meaningful landmark tags (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, and <code>&lt;footer&gt;</code>) to establish document structure and improve screen-reader navigation.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">02</div>
+            <h3>Design Token Consistency</h3>
+            <p>
+              Centralizes color palettes, border radii, container widths, and spacing intervals inside CSS custom properties (<code>:root</code>) for maintainable theming.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">03</div>
+            <h3>Adaptive Multi-Device Grid</h3>
+            <p>
+              Combines two-dimensional CSS Grid tracks with one-dimensional Flexbox alignment so multi-column cards collapse cleanly on tablets and smartphones.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Workflow / Two-Column Feature Section -->
+    <section id="workflow" class="section">
+      <div class="container split-layout">
+        <div class="split-media">
+          <div class="checklist-panel">
+            <h3>Responsive QA Checklist</h3>
+            <ul class="check-list">
+              <li>Desktop Layout Verified (1280px &amp; 1440px)</li>
+              <li>Tablet Two-Column Collapse Verified (768px – 900px)</li>
+              <li>Mobile Single-Column Stack Verified (375px – 600px)</li>
+              <li>Zero Unintended Horizontal Overflow</li>
+              <li>Accessible Focus States &amp; Color Contrast</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="split-content">
+          <span class="section-eyebrow">Execution Process</span>
+          <h2>From Static Wireframe Blocks to Production-Ready Code</h2>
+          <p>
+            Every wireframe block was mapped to a clear structural role before writing a single line of CSS. Grouping related elements inside modular containers keeps spacing predictable and avoids brittle absolute positioning.
+          </p>
+          <ol class="step-list">
+            <li><strong>Deconstruct:</strong> Identify navigation, hero, card grids, and footer landmarks.</li>
+            <li><strong>Structure:</strong> Author clean, accessible HTML5 markup with logical headings.</li>
+            <li><strong>Style &amp; Scale:</strong> Apply CSS Grid, Flexbox, and targeted media queries.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action Banner -->
+    <section id="contact" class="section cta-section">
+      <div class="container">
+        <div class="cta-box">
+          <div>
+            <h2>Ready for Week 1 Review</h2>
+            <p>Includes <code>index.html</code>, <code>styles.css</code>, and <code>REPORT.md</code> documenting all design decisions.</p>
+          </div>
+          <a href="#overview" class="btn btn-light">Back to Top</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>ApexStudio</span>
+        </a>
+        <p>Week 1 Frontend Internship Deliverable — Semantic HTML5 &amp; Responsive CSS3.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Deliverables</h4>
+        <ul>
+          <li><a href="#overview">index.html</a></li>
+          <li><a href="#features">styles.css</a></li>
+          <li><a href="#workflow">REPORT.md</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-meta">
+        <h4>Viewport Targets</h4>
+        <p>Desktop (&gt; 900px) &bull; Tablet (&le; 900px) &bull; Mobile (&le; 600px)</p>
+        <p class="copyright">&copy; 2026 ApexStudio. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

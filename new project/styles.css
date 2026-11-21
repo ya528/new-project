@@ -1,0 +1,629 @@
+/* ==========================================================================
+   Week 1 Task: Transforming Wireframes into Static Web Pages
+   Author: Frontend Intern
+   Description: Modular stylesheet using CSS Custom Properties, Grid, Flexbox,
+                and responsive media queries.
+   ========================================================================== */
+
+:root {
+  /* Color Palette */
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f1f5f9;
+  --color-text: #0f172a;
+  --color-text-muted: #475569;
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
+  --color-primary-soft: #eff6ff;
+  --color-border: #e2e8f0;
+  --color-dark: #0f172a;
+
+  /* Typography */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Spacing & Sizing */
+  --container-max: 1140px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+  --transition: 0.2s ease;
+}
+
+/* 1. Reset & Base Styles
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1, h2, h3, h4, p {
+  margin-top: 0;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--color-surface-alt);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  color: var(--color-primary-dark);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* 2. Layout Utilities
+   -------------------------------------------------------------------------- */
+.container {
+  width: min(100% - 2rem, var(--container-max));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: 4.5rem;
+}
+
+.section-alt {
+  background-color: var(--color-surface);
+  border-block: 1px solid var(--color-border);
+}
+
+.section-header {
+  max-width: 640px;
+  margin-inline: auto;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.section-header h2,
+.split-content h2 {
+  font-size: clamp(1.65rem, 2.8vw, 2.25rem);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.section-header p {
+  color: var(--color-text-muted);
+  margin-bottom: 0;
+}
+
+/* 3. Buttons
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.35rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.btn-outline {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-text-muted);
+  background-color: var(--color-surface-alt);
+}
+
+.btn-light {
+  background-color: #ffffff;
+  color: var(--color-dark);
+}
+
+.btn-light:hover {
+  background-color: var(--color-surface-alt);
+}
+
+/* 4. Header & Navigation
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 70px;
+  gap: 1rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--color-primary), #60a5fa);
+  display: inline-block;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a:not(.btn) {
+  text-decoration: none;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color var(--transition);
+}
+
+.nav-links a:not(.btn):hover {
+  color: var(--color-primary);
+}
+
+/* 5. Hero Section
+   -------------------------------------------------------------------------- */
+.hero {
+  padding-block: 4.5rem 5rem;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero-copy h1 {
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.1rem;
+}
+
+.lead {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1.75rem;
+  max-width: 56ch;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-bottom: 2.25rem;
+}
+
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  margin: 0;
+}
+
+.hero-metrics dt {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.hero-metrics dd {
+  margin: 0.2rem 0 0;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* Wireframe Visual Mockup */
+.mockup-frame {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.mockup-topbar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-surface-alt);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #cbd5e1;
+}
+
+.mockup-url {
+  margin-left: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.mockup-body {
+  padding: 1.25rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.wire-block {
+  border: 1.5px dashed #94a3b8;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg);
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.wire-banner {
+  min-height: 92px;
+  background-color: var(--color-primary-soft);
+  border-color: #93c5fd;
+  color: var(--color-primary-dark);
+}
+
+.wire-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.wire-card {
+  min-height: 76px;
+}
+
+.wire-split {
+  justify-content: space-between;
+  padding-inline: 1rem;
+}
+
+.wire-pill {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+}
+
+/* 6. Feature Cards Grid
+   -------------------------------------------------------------------------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.1rem;
+}
+
+.card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.6rem;
+}
+
+.card p {
+  color: var(--color-text-muted);
+  margin-bottom: 0;
+  font-size: 0.95rem;
+}
+
+/* 7. Split Workflow Section
+   -------------------------------------------------------------------------- */
+.split-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.checklist-panel {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.checklist-panel h3 {
+  margin-bottom: 1.1rem;
+}
+
+.check-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.check-list li {
+  position: relative;
+  padding-left: 1.75rem;
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.check-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.split-content p {
+  color: var(--color-text-muted);
+}
+
+.step-list {
+  padding-left: 1.25rem;
+  margin: 1.25rem 0 0;
+  display: grid;
+  gap: 0.65rem;
+  color: var(--color-text-muted);
+}
+
+.step-list strong {
+  color: var(--color-text);
+}
+
+/* 8. CTA Banner
+   -------------------------------------------------------------------------- */
+.cta-section {
+  padding-top: 1rem;
+}
+
+.cta-box {
+  background-color: var(--color-dark);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.cta-box h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.cta-box p {
+  color: #cbd5e1;
+  margin-bottom: 0;
+}
+
+.cta-box code {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+/* 9. Footer
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding-block: 3rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr 1fr;
+  gap: 2rem;
+}
+
+.footer-brand p,
+.footer-meta p {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-top: 0.65rem;
+}
+
+.footer-links h4,
+.footer-meta h4 {
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  color: var(--color-primary);
+}
+
+.copyright {
+  margin-top: 1rem;
+  font-size: 0.825rem;
+}
+
+/* 10. Responsive Media Queries
+   -------------------------------------------------------------------------- */
+
+/* Tablet Breakpoint (<= 900px) */
+@media (max-width: 900px) {
+  .hero-grid,
+  .split-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cta-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Mobile Breakpoint (<= 600px) */
+@media (max-width: 600px) {
+  .section {
+    padding-block: 3.25rem;
+  }
+
+  .nav-wrapper {
+    flex-direction: column;
+    padding-block: 0.85rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.9rem 1.15rem;
+  }
+
+  .hero {
+    padding-block: 3rem 3.5rem;
+  }
+
+  .hero-metrics {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .wire-row,
+  .card-grid,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-box {
+    padding: 1.75rem;
+  }
+}
